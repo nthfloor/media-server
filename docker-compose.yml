@@ -22,10 +22,10 @@ services:
       - USER=username #optional
       - PASS=password #optional
     volumes:
-      - /home/nathanf/media-server/config/transmission:/var/lib/transmission-daemon/info
+      - $HOME/media-server/config/transmission:/var/lib/transmission-daemon/info
       #set transmission or sonarr download folder to /downloads
-      - /home/nathanf/media-server/downloads/complete:/downloads
-      - /home/nathanf/media-server/downloads/temp:/var/lib/transmission-daemon/incomplete
+      - $HOME/media-server/downloads/complete:/downloads
+      - $HOME/media-server/downloads/temp:/var/lib/transmission-daemon/incomplete
 
   sonarr:
     image: linuxserver/sonarr
@@ -36,9 +36,9 @@ services:
       - TZ=Africa/Cairo
       - UMASK_SET=022 #optional
     volumes:
-      - /home/nathanf/media-server/config/sonarr:/config
-      - /home/nathanf/media-server/storage/series:/tv
-      - /home/nathanf/media-server/downloads/complete:/downloads
+      - $HOME/media-server/config/sonarr:/config
+      - #HOME/media-server/storage/series:/tv
+      - $HOME/media-server/downloads/complete:/downloads
     ports:
       - 8989:8989
     networks:
@@ -58,9 +58,9 @@ services:
       - PUID=1000
       - PGID=1000
     volumes:
-      - /home/nathanf/media-server/config/radarr:/config
-      - /home/nathanf/media-server/storage/movies:/movies
-      - /home/nathanf/media-server/downloads/complete:/downloads
+      - $HOME/media-server/config/radarr:/config
+      - $HOME/media-server/storage/movies:/movies
+      - $HOME/media-server/downloads/complete:/downloads
 
   jackett:
     container_name: jackett
@@ -75,6 +75,6 @@ services:
       - PUID=1000
       - PGID=1000
     volumes:
-      - /home/nathanf/media-server/config/jackett:/config
-      - /home/nathanf/media-server/downloads/blackhole:/downloads
+      - $HOME/media-server/config/jackett:/config
+      - $HOME/media-server/downloads/blackhole:/downloads
 
