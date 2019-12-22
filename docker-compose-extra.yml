@@ -1,0 +1,31 @@
+---
+version: "2"
+
+services:
+  plex:
+    container_name: plex
+    image: plexinc/pms-docker
+    restart: unless-stopped
+    environment:
+      - TZ=Africa/Cairo
+      - PLEX_CLAIM=
+      - PLEX_UID=1000
+      - PLEX_GID=1000
+    ports:
+      - 3000:32400
+    networks:
+      - media-server
+    volumes:
+      - /home/nathanf/media-server/config/plex:/config
+      - /home/nathanf/media-server/transcode:/transcode
+      - /home/nathanf/media-server/storage:/data
+
+  portainer:
+    image: portainer/portainer
+    container_name: portainer
+    ports:
+      - 9000:9000
+    volumes:
+      - /home/nathanf/media-server/portainer:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
